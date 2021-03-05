@@ -5,7 +5,7 @@ def read_file(filename):
     products = []
     with open(filename, 'r', encoding = 'utf-8')as f:
         for line in f:
-            if line == '商品, 價格':
+            if '商品,價格' in line  :
                 continue # 繼續,跳到下一行
             name, price = line.strip().split(',')
             products.append([name, price])    
@@ -31,7 +31,7 @@ def print_file(products):
 # 寫入檔案
 def write_file(filename, products):
     with open(filename, 'w', encoding='utf-8')as f:
-        f.write('商品, 價格\n')
+        f.write('商品,價格\n')
         for p in products:
             f.write(p[0] + ',' + str(p[1]) + '\n')
 
