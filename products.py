@@ -1,12 +1,16 @@
-# 讀取資料
+import os # operating system
 products = [] # 設立一個資料庫products
-with open('products.csv', 'r', encoding='utf-8') as f:
-	for line in f:
-		if '商品, 價格' in line:
-			continue
-		name,price = line.strip().split(',')
-		products.append([name, price])
-print(products)
+if os.path.isfile('products.csv'): # 收尋檔案
+	print('恭喜找到檔案!')
+	with open('products.csv', 'r', encoding='utf-8') as f:# 讀取資料
+	    for line in f:
+		    if '商品, 價格' in line:
+			    continue
+		    name,price = line.strip().split(',') # 一行一行的資料,strip剔除空格,split切割列
+		    products.append([name, price])         
+
+else:
+	print('沒找到檔案喔!')
 
 # 讓使用者輸入
 while True: # 進行迴圈(因為需要重複詢問'商品名稱'和'商品價格')
@@ -20,7 +24,7 @@ print(products)
 # 印出檔案
 for p in products: # 用'p'迴路資料庫products
 	print('商品', p[0], '價格', p[1]) # 印出所有在products中的資料,一格一格輸出
-	
+
 # 寫入檔案
 with open('products.csv', 'w', encoding='utf-8') as f: # 創造一個資料夾'products.csv'並且寫入資料,並且用coding'utf-s'(國際通用編碼程式)寫入資料
 	f.write('商品, 價格\n') # 寫入第一欄'商品,價格'空格
